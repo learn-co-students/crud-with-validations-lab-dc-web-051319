@@ -1,0 +1,45 @@
+class <%="#{file_name.capitalize}Controller" %> < ApplicationController
+
+  def index
+    <%="@#{file_name.pluralize}"%> = <%="#{file_name.capitalize}"%>.all
+  end
+
+  def show
+    <%="@#{file_name}"%> = <%="#{file_name.capitalize}.find(params[:id])"%>
+
+  end
+
+  def new
+    <%="@#{file_name}"%> = <%="#{file_name.capitalize}.new"%>
+  end
+
+  def create
+    <%="@#{file_name}"%> = self.new
+    <%="@#{file_name}.name"%> = params[<%=":#{file_name}"%>][:!UPDATE VARIABLES!]
+    <%="@#{file_name}.save"%>
+    redirect_to <%="#{file_name}_path"%>(<%="@#{file_name}.id"%>)
+  end
+
+  def edit
+    <%="@#{file_name}"%> = <%="#{file_name.capitalize}.find(params[:id])"%>
+  end
+
+
+  def update
+    <%="@#{file_name}"%> = <%="#{file_name.capitalize}.find(params[:id])"%>
+    <%="@#{file_name}.update(:!UPDATE VARIABLES! params[#{file_name}][:!UPDATE VARIABLES!])"%>
+    redirect_to <%="#{file_name}_path(@#{file_name}.id)"%>
+  end
+
+  def destroy
+    <%="@#{file_name}"%> = <%="#{file_name.capitalize}.find(params[:id])"%>
+    <%="@#{file_name}.destroy"%>
+    redirect_to <%="#{file_name.pluralize}_path"%>
+  end
+
+  private
+
+  def <%="#{file_name}_params" %>
+    <%= "params.require(:#{file_name}).permit(:!UPDATE VARIABLES!)" %>
+  end
+end
